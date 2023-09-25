@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Implimentation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Implimentation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Models\Blog.Models.csproj" />
+    <ProjectReference Include="..\Blog.Data\Blog.Data.csproj" />
+  </ItemGroup>
+</Project>

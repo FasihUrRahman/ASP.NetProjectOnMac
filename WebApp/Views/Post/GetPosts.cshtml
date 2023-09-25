@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Blog.Models.Post>
+
+@{
+    ViewData["Title"] = "Posts";
+}
+
+
+<h1>Blog Posts</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <a class="btn btn-info" asp-action="AddEditPost" asp-controller="Post">Create New</a>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelitem => item.Id)</td>
+                                    <td>@Html.DisplayFor(modelitem => item.Title)</td>
+                                    <td>@Html.DisplayFor(modelitem => item.Category.Name)</td>
+                                    <td>@Html.DisplayFor(modelitem => item.PostStatus.Name)</td>
+                                    <td><a class="btn btn-info" asp-action="AddEditPost" asp-controller="Post" asp-route-Id="@item.Id">Edit</a> <a class="btn btn-danger" asp-action="DeletePost" asp-controller="Post" asp-route-Id="@item.Id">Delete</a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
