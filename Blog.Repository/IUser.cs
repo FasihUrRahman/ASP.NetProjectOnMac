@@ -14,10 +14,11 @@ namespace Blog.Repository
         List<UserRole> GetRoles();
         UserRole GetRole(int id);
         void AddEditRole(UserRole userRole);
-        void DeleteRole(int id);
+        string DeleteRole(int id);
         //To Get Users From DB
         //Users Mehtods
         List<User> GetUsers();
+        User GetUser();
         User GetUser(int id);
         void AddEditUser(User user);
         void DeleteUser(int id);

@@ -19,6 +19,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult Roles()
         {
+            ViewBag.Message = TempData["Message"] as string;
             return View(_user.GetRoles());
         }
         [HttpGet]
@@ -35,7 +36,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult DeleteRole(int id)
         {
-            _user.DeleteRole(id);
+            TempData["Message"] = _user.DeleteRole(id);
             return RedirectToAction("Roles");
         }
         /*--------------Users--------------*/

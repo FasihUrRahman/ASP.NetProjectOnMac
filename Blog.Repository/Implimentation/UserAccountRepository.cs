@@ -21,6 +21,11 @@ namespace Blog.Repository.Implimentation
 
         }
 
+        public User GetUserInfo(string accessToken)
+        {
+            return _db.Users.Where(x => x.AccessToken.Equals(accessToken)).FirstOrDefault();
+        }
+
         public string Register(User user)
         {
             var isUserEmail = _db.Users.FirstOrDefault(x => x.EmailAddress == user.EmailAddress);

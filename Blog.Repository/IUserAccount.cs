@@ -14,5 +14,7 @@ namespace Blog.Repository
         //To Get Token
         User GetUserForLogin(string email, string password);
         string Register(User user);
+        //Getting Value For Common Controller
+        User GetUserInfo(string accessToken);
     }
 }

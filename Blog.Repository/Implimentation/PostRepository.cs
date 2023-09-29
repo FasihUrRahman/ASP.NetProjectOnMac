@@ -37,19 +37,42 @@ namespace Blog.Repository.Implimentation
         }
 
         //Delete Category from DB
-        public void DeleteCategory(int id)
+        public string DeleteCategory(int id)
         {
             Category categoryId = _db.Categories.Where(x => x.Id.Equals(id)).FirstOrDefault();
-            _db.Remove(categoryId);
-            _db.SaveChanges();
-
+            if (GetPost().CategoryId != id)
+            {
+                _db.Remove(categoryId);
+                _db.SaveChanges();
+                return "Successfully Deleted";
+            }
+            return "Unable to Delete Category. This is already Used by Posts";
+        }
+        public Post GetPost()
+        {
+            return _db.Posts.Include(x => x.Category).Include(x => x.PostStatus).FirstOrDefault();
         }
         //----Post Methods Defination----//
         public Post GetPost(int id)
         {
             return _db.Posts.Where(x => x.Id.Equals(id)).Include(x => x.Category).Include(x => x.PostStatus).Include(x => x.User).FirstOrDefault();
         }
+        //Delete Post
+        public void DeletePost(int id)
+        {
+            Post post = _db.Posts.Where(x => x.Id == id).FirstOrDefault();
+            _db.Posts.Remove(post);
+            _db.SaveChanges();
+        }
 
+        public void AddEditPost(Post post)
+        {
+            post.PostedOn = DateTime.UtcNow.AddHours(5);
+            _db.Update(post);
+            _db.SaveChanges();
+        }
+
+        //Read Post
         public List<Post> GetPosts
         {
             get { return _db.Posts.Include(x => x.Category).Include(x => x.PostStatus).ToList(); }

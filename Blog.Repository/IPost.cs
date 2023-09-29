@@ -12,9 +12,12 @@ namespace Blog.Repository
         List<Category> GetCategories();
         Category GetCategory(int id);
         void AddEditCategory(Category category);
-        void DeleteCategory(int id);
+        string DeleteCategory(int id);
         //----------Posts----------//
         List<Post> GetPosts { get; }
+        public Post GetPost();
         Post GetPost(int id);
+        void AddEditPost(Post post);
+        void DeletePost(int id);
     }
 }

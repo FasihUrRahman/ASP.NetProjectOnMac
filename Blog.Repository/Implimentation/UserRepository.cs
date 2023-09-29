@@ -23,11 +23,16 @@ namespace Blog.Repository.Implimentation
             _db.UsersRole.Update(userRole);
             _db.SaveChanges();
         }
-        public void DeleteRole(int id)
+        public string DeleteRole(int id)
         {
             UserRole userRoleId = _db.UsersRole.Where(x => x.Id.Equals(id)).FirstOrDefault();
-            _db.Remove(userRoleId);
-            _db.SaveChanges();
+            if (GetUser().UserRoleId != id)
+            {
+                _db.Remove(userRoleId);
+                _db.SaveChanges();
+                return "Delete Successfully";
+            }
+            return "Unable to Delete as it's already in Use. Please Delete Users before deleteing Role";
 
         }
         public UserRole GetRole(int id)
@@ -42,6 +47,10 @@ namespace Blog.Repository.Implimentation
         public List<User> GetUsers()
         {
             return _db.Users.Include(x => x.UserRole).ToList();
+        }
+        public User GetUser()
+        {
+            return _db.Users.Include(x => x.UserRole).FirstOrDefault();
         }
         public User GetUser(int id)
         {

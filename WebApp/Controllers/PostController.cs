@@ -8,11 +8,11 @@ namespace WebApp.Controllers
     public class PostController : Controller
     {
         private readonly IPost _post;
-        private readonly IPost _user;
-        public PostController(IPost post, IPost user)
+        private readonly IUserAccount _account;
+        public PostController(IPost post, IUserAccount account)
         {
             _post = post;
-            _user = user;
+            _account = account;
         }
         //------Categories Methods------//
 
@@ -21,6 +21,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult Categories()
         {
+            ViewBag.Message = TempData["Message"] as string;
             return View(_post.GetCategories());
         }
         //Getting Category by id from DB in AddEditCategory Page
@@ -40,7 +41,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult DeleteCategory(int id)
         {
-            _post.DeleteCategory(id);
+            TempData["Message"] = _post.DeleteCategory(id);
             return RedirectToAction("Categories");
         }
         //------Post Methods------//
@@ -66,6 +67,22 @@ namespace WebApp.Controllers
         {
             ViewBag.AllCategories = new SelectList(_post.GetCategories().ToList(), "Id", "Name");
             return View(_post.GetPost(id));
+        }
+        //User user = new CommonController(_account).GetUser(HttpContext);
+        [HttpPost]
+        public IActionResult AddEditPost(Post post)
+        {
+            //Getting Value of User From Common Controller
+            User user = new CommonController(_account).GetUser(HttpContext);
+            post.UserId = user.Id;  //Giving Value of Common Controller to user
+            _post.AddEditPost(post);    //Calling Method for Sending data to DB
+            return RedirectToAction("GetPosts");
+        }
+        [HttpGet]
+        public IActionResult DeletePost(int id)
+        {
+            _post.DeletePost(id);
+            return RedirectToAction("GetPosts");
         }
     }
 }
