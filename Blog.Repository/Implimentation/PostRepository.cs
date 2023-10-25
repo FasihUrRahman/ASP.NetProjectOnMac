@@ -64,18 +64,64 @@ namespace Blog.Repository.Implimentation
             _db.Posts.Remove(post);
             _db.SaveChanges();
         }
-
+        //Add Update Post
         public void AddEditPost(Post post)
         {
             post.PostedOn = DateTime.UtcNow.AddHours(5);
             _db.Update(post);
             _db.SaveChanges();
         }
-
+        //Get Reactions Type in List
+        public List<ReactionType> GetReactionTypes()
+        {
+            return _db.ReactionTypes.ToList();
+        }
+        //Get Reaction Type by ID
+        public ReactionType GetReactionType(int id)
+        {
+            return _db.ReactionTypes.Where(x => x.Id == id).FirstOrDefault();
+        }
+        //Add or Update Reaction Type
+        public void AddEditReactionType(ReactionType reactionType)
+        {
+            _db.Update(reactionType);
+            _db.SaveChanges();
+        }
+        //Delete Reaction Type
+        public void DeleteReactionType(int id)
+        {
+            ReactionType reactionTypeId = _db.ReactionTypes.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            _db.Remove(reactionTypeId);
+            _db.SaveChanges();
+        }
+        //Get Post Statuses
+        public List<PostStatus> GetPostStatuses()
+        {
+            return _db.PostsStatus.ToList();
+        }
+        //Get PostStatus By ID
+        public PostStatus GetPostStatus(int id)
+        {
+            return _db.PostsStatus.Where(x => x.Id.Equals(id)).FirstOrDefault();
+        }
+        //Set Value to DB from Given Data
+        public void AddEditPostStatus(PostStatus postStatus)
+        {
+            _db.Update(postStatus);
+            _db.SaveChanges();
+        }
+        //Remove Value from DB by ID
+        public void DeletePostStatus(int id)
+        {
+            PostStatus postStatusId = _db.PostsStatus.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            _db.Remove(postStatusId);
+            _db.SaveChanges();
+        }
         //Read Post
         public List<Post> GetPosts
         {
             get { return _db.Posts.Include(x => x.Category).Include(x => x.PostStatus).ToList(); }
         }
+
     }
 }

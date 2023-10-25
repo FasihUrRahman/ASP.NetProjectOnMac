@@ -17,7 +17,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
-            <form asp-action="AddEditPost">
+            <form asp-action="AddEditPost" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label asp-for="Title" class="form-label">Post Title</label>
                     <input asp-for="Title" type="text" class="form-control">
@@ -28,9 +28,8 @@
                     <select asp-for="CategoryId" asp-items="@ViewBag.AllCategories" class="form-control"></select>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Image" class="form-label">Image</label>
-                    <input asp-for="Image" type="text" class="form-control">
-                    <span asp-validation-for="Image" class="text-danger"></span>
+                    <label for="PostImage" class="form-label">Image</label>
+                    <input name="PostImage" type="file" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label asp-for="ShortDescription" class="form-label">Short Description</label>
@@ -49,8 +48,7 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="PostStatus" class="form-label">Post Status</label>
-                    <input asp-for="PostStatus.Name" type="text" class="form-control">
-                    <span asp-validation-for="PostStatus" class="text-danger"></span>
+                    <select asp-for="PostStatusId" asp-items="@ViewBag.AllPostStatuses" class="form-control"></select>
                 </div>
                 @if (!string.IsNullOrEmpty(ViewBag.Error))
                 {

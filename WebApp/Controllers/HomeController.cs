@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Blog.Data;
+using Blog.Helper;
+using Blog.Models;
+using Blog.Repository;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApp.Models;
 
@@ -7,13 +11,16 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IPost _post;
+        private readonly BlogContext _dbContext;
+        public HomeController(ILogger<HomeController> logger, IPost post, BlogContext dbContext)
         {
             _logger = logger;
+            _post = post;
+            _dbContext = dbContext;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? pageNumber)
         {
             //Commented part is The method of linking ASP.Net With FireBase And For This We Use Nuget Package Name: FireSharp
             /*string authSecret = "xtkV91sBXjl7MrO1H6jZlF3al30m7e0tPbpMU5F2";
@@ -36,7 +43,8 @@ namespace WebApp.Controllers
                 };
                 var response = client.Push("doc/", data);
             }*/
-            return View();
+            int pageSize = 6;
+            return View(PaginatedList<Post>.Create(_post.GetPosts.ToList(), pageNumber ?? 1, pageSize));
         }
 
         public IActionResult Privacy()

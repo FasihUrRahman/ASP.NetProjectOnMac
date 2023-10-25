@@ -8,12 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//Builder For DB Connection
+//Builder For DB Connection for SQL Server
 builder.Services.AddDbContext<BlogContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 },
     ServiceLifetime.Transient);
+
+//Builder For DB Connection for PostgreSQL
+/*builder.Services.AddDbContext<BlogContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+}, ServiceLifetime.Transient);*/
 
 //Creating Object of Blog.Repostory(This have to be Created when we willing to use that repostory in Our Project)
 builder.Services.AddTransient<IUserAccount, UserAccountRepository>(p => new UserAccountRepository(builder.Services.BuildServiceProvider().GetService<BlogContext>()));

@@ -1,13 +1,13 @@
-﻿@model Blog.Models.Category;
+﻿@model Blog.Models.PostStatus;
 @{
-    ViewData["Title"] = "Add or Edit Category";
+    ViewData["Title"] = "Add or Edit Post Status";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
-            <form asp-action="AddEditCategory">
+            <form asp-action="AddEditPostStatus">
                 <div class="mb-3">
                     <label asp-for="Name" class="form-label">Name</label>
                     <input asp-for="Name" type="text" class="form-control">
@@ -17,7 +17,7 @@
                 {
                     <p class="text-danger">@ViewBag.Error</p>
                 }
-                <button type="submit" class="mt-3 btn btn-primary">Add / Update</button> <a class="mt-3 btn btn-danger" asp-action="Categories" asp-controller="Post">Back</a>
+                <button type="submit" class="mt-3 btn btn-primary">Add / Update</button> <a class="mt-3 btn btn-danger" asp-action="PostStatus" asp-controller="Post">Back</a>
             </form>
         </div>
     </div>

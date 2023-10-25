@@ -9,6 +9,7 @@ namespace Blog.Repository
 {
     public interface IPost
     {
+        //------Category-----//
         List<Category> GetCategories();
         Category GetCategory(int id);
         void AddEditCategory(Category category);
@@ -19,5 +20,15 @@ namespace Blog.Repository
         Post GetPost(int id);
         void AddEditPost(Post post);
         void DeletePost(int id);
+        //------Reaction types-----//
+        List<ReactionType> GetReactionTypes();
+        ReactionType GetReactionType(int id);
+        void AddEditReactionType(ReactionType reactionType);
+        void DeleteReactionType(int id);
+        //-----Post Status-----//
+        List<PostStatus> GetPostStatuses();
+        PostStatus GetPostStatus(int id);
+        void AddEditPostStatus(PostStatus postStatus);
+        void DeletePostStatus(int id);
     }
 }

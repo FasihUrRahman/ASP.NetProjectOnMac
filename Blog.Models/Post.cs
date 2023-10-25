@@ -19,5 +19,6 @@ namespace Blog.Models
         public virtual User User { get; set; }
         public int UserId { get; set; }
         public virtual PostStatus PostStatus { get; set; }
+        public int PostStatusId { get; set; }
     }
 }

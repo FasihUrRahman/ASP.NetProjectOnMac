@@ -16,6 +16,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebApp</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
@@ -37,38 +41,57 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (user.UserRoleId == 1)
+                        @if (user != null)
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownCategory" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Post" asp-action="Categories">All Categories</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Post" asp-action="AddEditCategory">Add Category</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownPost" role="button" data-bs-toggle="dropdown" aria-expanded="false">Post</a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownPost">
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Post" asp-action="GetPosts">All Posts</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Post" asp-action="AddEditPost">Add Post</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownUserRole" role="button" data-bs-toggle="dropdown" aria-expanded="false">User Role</a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownUserRole">
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Roles">All User Roles</a></li>
-                                    <li><a class="dropdown-item" asp-controller="User" asp-action="AddEditRole">Add User Role</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownUser">
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Users">All Users</a></li>
-                                    <li><a class="dropdown-item" asp-controller="User" asp-action="AddEditUser">Add User</a></li>
-                                </ul>
-                            </li>
+                            @if (user.UserRoleId == 1)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownCategory" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Post" asp-action="Categories">All Categories</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Post" asp-action="AddEditCategory">Add Category</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownPostStatus" role="button" data-bs-toggle="dropdown" aria-expanded="false">Post Status</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownPostStatus">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Post" asp-action="PostStatus">All Post Statuses</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Post" asp-action="AddEditPostStatus">Add Post Status</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownPost" role="button" data-bs-toggle="dropdown" aria-expanded="false">Post</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownPost">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Post" asp-action="GetPosts">All Posts</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Post" asp-action="AddEditPost">Add Post</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownUserRole" role="button" data-bs-toggle="dropdown" aria-expanded="false">User Role</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownUserRole">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Roles">All User Roles</a></li>
+                                        <li><a class="dropdown-item" asp-controller="User" asp-action="AddEditRole">Add User Role</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownUser">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Users">All Users</a></li>
+                                        <li><a class="dropdown-item" asp-controller="User" asp-action="AddEditUser">Add User</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            @if (user.UserRoleId == 0)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                </li>
+                            }
                         }
-                        @if (user.UserRoleId == 0)
+                        else
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
@@ -77,14 +100,18 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                         }
+
                     </ul>
-                    @if (user.UserRoleId > 0)
+                    @if (user != null)
                     {
-                        <div class="d-flex">
-                            <a class="nav-link text-danger" asp-area="" asp-controller="Account" asp-action="Logout">
-                                Logout(<span class="text-dark">@user.Name</span>)
-                            </a>
-                        </div>
+                        if (user.UserRoleId > 0)
+                        {
+                            <div class="d-flex">
+                                <a class="nav-link text-danger" asp-area="" asp-controller="Account" asp-action="Logout">
+                                    Logout(<span class="text-dark">@user.Name</span>)
+                                </a>
+                            </div>
+                        }
                     }
                 </div>
             </div>

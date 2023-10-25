@@ -2,7 +2,6 @@
 using Blog.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 
 namespace WebApp.Controllers
 {

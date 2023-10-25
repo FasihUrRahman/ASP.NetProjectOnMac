@@ -1,13 +1,13 @@
-﻿@model IEnumerable<Blog.Models.Category>
+﻿@model IEnumerable<Blog.Models.ReactionType>
 
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = "Reaction Type";
 }
-<h1>New Categories</h1>
+<h1>New Reaction Type</h1>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
-            <a class="btn btn-info" asp-action="AddEditCategory" asp-controller="Post">Create New</a>
+            <a class="btn btn-info" asp-action="AddEditReactionType" asp-controller="Post">Create New</a>
         </div>
         <div class="row justify-content-center">
             <div class="col-6">
@@ -27,7 +27,7 @@
                                 <tr>
                                     <td>@Html.DisplayFor(modelitem => item.Id)</td>
                                     <td>@Html.DisplayFor(modelitem => item.Name)</td>
-                                    <td><a class="btn btn-info" asp-action="AddEditCategory" asp-controller="Post" asp-route-Id="@item.Id">Edit</a> <a class="btn btn-danger" asp-action="DeleteCategory" asp-controller="Post" asp-route-Id="@item.Id">Delete</a></td>
+                                    <td><a class="btn btn-info" asp-action="AddEditReactionType" asp-controller="Post" asp-route-Id="@item.Id">Edit</a> <a class="btn btn-danger" asp-action="DeleteReactionType" asp-controller="Post" asp-route-Id="@item.Id">Delete</a></td>
                                 </tr>
                             }
                         }
@@ -37,13 +37,4 @@
 
         </div>
     </div>
-    @if (ViewBag.Message != null)
-    {
-        <div class="position-absolute top-0 end-0 mt-5 mr-5">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                @ViewBag.Message
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </div>
-    }
 </div>
